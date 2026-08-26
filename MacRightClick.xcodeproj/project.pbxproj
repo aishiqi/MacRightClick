@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00407E83976D54061CC25417 /* ActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051870FB7E771907A87FE0A /* ActionsTabView.swift */; };
+		15FA11EB587E749EFBCEA9B3 /* NewFileTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C2534B7FD06803B4FFF327 /* NewFileTabView.swift */; };
+		15FFA8FDE7D8454F5C39C051 /* SharedConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F8692FB92BB03654C397B6 /* SharedConfig.swift */; };
+		17CF86A8CC5B28F257FC9AED /* MenuConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E885FA25BBA7F7D100CE /* MenuConfig.swift */; };
+		1CD524D9EAA12CF7956B5EB8 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1252577E0B7CE60098468 /* DebugLog.swift */; };
+		1D7BA59E674081DBE63E9958 /* ActionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB817226DF6CAE2E2CBB7DC /* ActionCommand.swift */; };
+		27CDCF1FB2FE9C388DC11688 /* MacRightClickFinderExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00D81D23155C33DB1BFFCDF6 /* MacRightClickFinderExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27F502CCF68CBE14CA5A1B9D /* MenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C03B0F5F3B9964D6275E5 /* MenuBuilder.swift */; };
+		2A80C80A5F346098F9098248 /* AppLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA26F5BABC5F61AF8724031 /* AppLocator.swift */; };
+		2E5F9412067E2202D4BB774D /* ExtensionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EDFCAE76C26392FC7659A /* ExtensionStatus.swift */; };
+		3BF2B54D9BC729C2101F9ED3 /* ActionRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F04484CC2DCC6AD7B46AC6 /* ActionRunner.swift */; };
+		42EF2841CE3ED7376B972417 /* PathResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED3B16160E34E99AC03B157 /* PathResolver.swift */; };
+		449B97DA45E5FFA34950ABE9 /* FinderSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD7EE86D8DBF7A3F17C13FAF /* FinderSync.framework */; };
+		47285C37ED92AEF424FFCBB0 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C98B74FEB2F85C3C4D457B /* FinderSync.swift */; };
+		4E2E67C937B5FF26A77E141F /* ExtensionActionRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2849DCDE6677C6938A03A9 /* ExtensionActionRunner.swift */; };
+		50C3D0F8AF8B48ECB5A65C87 /* IconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D6473E4E25AC8C9E6C53 /* IconProvider.swift */; };
+		53B05B1963FF5D7D3558819A /* ConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C8FFAD85185F50F91A95ED /* ConfigStore.swift */; };
+		53BBCE1D6C66B9BB58E50CC3 /* TerminalLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E54648F2D6EF3DD693FDFF0 /* TerminalLauncher.swift */; };
+		6C02B8549B967524BAFA3AAC /* MenuConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E885FA25BBA7F7D100CE /* MenuConfig.swift */; };
+		801A683E93E12D5335C8EFD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 715739C3FC97D56F8B75C2CA /* Assets.xcassets */; };
+		82C7D91F5E2FBDA24F2E37DF /* OpenAppsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E9BA1DF88BB1D8372F122 /* OpenAppsTabView.swift */; };
+		8411AC2FCB262F5BC609D69D /* FinderSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD7EE86D8DBF7A3F17C13FAF /* FinderSync.framework */; };
+		8D40F77DB56E0B1BA113E9D4 /* ActionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB817226DF6CAE2E2CBB7DC /* ActionCommand.swift */; };
+		906A9DE21540FC8A70C6E087 /* AppLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA26F5BABC5F61AF8724031 /* AppLocator.swift */; };
+		939C2C2FBF593701C31D75AE /* MacRightClickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B9DF1CBDA7216D24C8166 /* MacRightClickApp.swift */; };
+		99FB1F72F77FD1FE750502FD /* ConfigTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512CC7DF81916956716BB5E0 /* ConfigTable.swift */; };
+		9D96B942EDA5BB64F5A0EF09 /* IconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D6473E4E25AC8C9E6C53 /* IconProvider.swift */; };
+		AABFE2F08C5F59DA740C50BA /* TerminalLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E54648F2D6EF3DD693FDFF0 /* TerminalLauncher.swift */; };
+		C0C6D6F969B5C9ACDCF0304C /* SetupTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDC838C9F56C3C0462B870 /* SetupTabView.swift */; };
+		C12C38B77D98A4600F250CB1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1018F18C5C776ABBA1FE787 /* SettingsView.swift */; };
+		C976FF84956834762131D419 /* SharedConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F8692FB92BB03654C397B6 /* SharedConfig.swift */; };
+		CAE513D177188D9CADBB6B0F /* PathResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED3B16160E34E99AC03B157 /* PathResolver.swift */; };
+		E010191DAEA600CEAAE84F67 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1252577E0B7CE60098468 /* DebugLog.swift */; };
+		F1C70663E051452B81EF9AE5 /* MenuCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DFF6E1C79FB4ED41B3C68B /* MenuCache.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CED616AEF936C731E6326A52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37FB147CDF8ECC69C4ACACEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F67506A9D8A0FDA63448314;
+			remoteInfo = MacRightClickFinderExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB90DEA8F356F15E5D63133E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				27CDCF1FB2FE9C388DC11688 /* MacRightClickFinderExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		00D81D23155C33DB1BFFCDF6 /* MacRightClickFinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacRightClickFinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FF6D6473E4E25AC8C9E6C53 /* IconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconProvider.swift; sourceTree = "<group>"; };
+		11C2534B7FD06803B4FFF327 /* NewFileTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFileTabView.swift; sourceTree = "<group>"; };
+		12C98B74FEB2F85C3C4D457B /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		18DFF6E1C79FB4ED41B3C68B /* MenuCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCache.swift; sourceTree = "<group>"; };
+		1ED3B16160E34E99AC03B157 /* PathResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathResolver.swift; sourceTree = "<group>"; };
+		2E54648F2D6EF3DD693FDFF0 /* TerminalLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalLauncher.swift; sourceTree = "<group>"; };
+		512CC7DF81916956716BB5E0 /* ConfigTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTable.swift; sourceTree = "<group>"; };
+		52EDC838C9F56C3C0462B870 /* SetupTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTabView.swift; sourceTree = "<group>"; };
+		5732D55412ACDE65701E2BAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		60C8FFAD85185F50F91A95ED /* ConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigStore.swift; sourceTree = "<group>"; };
+		6FF1252577E0B7CE60098468 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		7051870FB7E771907A87FE0A /* ActionsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsTabView.swift; sourceTree = "<group>"; };
+		715739C3FC97D56F8B75C2CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F2849DCDE6677C6938A03A9 /* ExtensionActionRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionActionRunner.swift; sourceTree = "<group>"; };
+		822C03B0F5F3B9964D6275E5 /* MenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuilder.swift; sourceTree = "<group>"; };
+		841EDFCAE76C26392FC7659A /* ExtensionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionStatus.swift; sourceTree = "<group>"; };
+		8BF6A1B7692663262BD0BB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D5E9BA1DF88BB1D8372F122 /* OpenAppsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAppsTabView.swift; sourceTree = "<group>"; };
+		92F8692FB92BB03654C397B6 /* SharedConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConfig.swift; sourceTree = "<group>"; };
+		A7F04484CC2DCC6AD7B46AC6 /* ActionRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRunner.swift; sourceTree = "<group>"; };
+		BD7EE86D8DBF7A3F17C13FAF /* FinderSync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FinderSync.framework; path = System/Library/Frameworks/FinderSync.framework; sourceTree = SDKROOT; };
+		C1DB9807289470FCD747EA25 /* MacRightClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacRightClick.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D208E885FA25BBA7F7D100CE /* MenuConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfig.swift; sourceTree = "<group>"; };
+		D8F19D32596889221A7A6F18 /* MacRightClickFinderExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacRightClickFinderExtension.entitlements; sourceTree = "<group>"; };
+		E1018F18C5C776ABBA1FE787 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E28B9DF1CBDA7216D24C8166 /* MacRightClickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacRightClickApp.swift; sourceTree = "<group>"; };
+		E9662E22A93843D17AC2BF43 /* MacRightClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacRightClick.entitlements; sourceTree = "<group>"; };
+		ECB817226DF6CAE2E2CBB7DC /* ActionCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCommand.swift; sourceTree = "<group>"; };
+		FBA26F5BABC5F61AF8724031 /* AppLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocator.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4598DD4F7C14D3BBCA9E438C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				449B97DA45E5FFA34950ABE9 /* FinderSync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA217598559D4375B35E4600 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8411AC2FCB262F5BC609D69D /* FinderSync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		187F0A32F7DA507F5784CAAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C1DB9807289470FCD747EA25 /* MacRightClick.app */,
+				00D81D23155C33DB1BFFCDF6 /* MacRightClickFinderExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		36FB9109F65423A5E14D7082 /* MacRightClickFinderExtension */ = {
+			isa = PBXGroup;
+			children = (
+				7F2849DCDE6677C6938A03A9 /* ExtensionActionRunner.swift */,
+				12C98B74FEB2F85C3C4D457B /* FinderSync.swift */,
+				8BF6A1B7692663262BD0BB53 /* Info.plist */,
+				D8F19D32596889221A7A6F18 /* MacRightClickFinderExtension.entitlements */,
+				822C03B0F5F3B9964D6275E5 /* MenuBuilder.swift */,
+				18DFF6E1C79FB4ED41B3C68B /* MenuCache.swift */,
+			);
+			path = MacRightClickFinderExtension;
+			sourceTree = "<group>";
+		};
+		749BD2441BF20BF5595052A7 /* MacRightClick */ = {
+			isa = PBXGroup;
+			children = (
+				715739C3FC97D56F8B75C2CA /* Assets.xcassets */,
+				60C8FFAD85185F50F91A95ED /* ConfigStore.swift */,
+				5732D55412ACDE65701E2BAA /* Info.plist */,
+				E9662E22A93843D17AC2BF43 /* MacRightClick.entitlements */,
+				E28B9DF1CBDA7216D24C8166 /* MacRightClickApp.swift */,
+				DF58D1F533486F2CBF6B8534 /* Services */,
+				B22908BF236B35977FF5F541 /* Settings */,
+			);
+			path = MacRightClick;
+			sourceTree = "<group>";
+		};
+		873CC08AB3882355EF277823 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				ECB817226DF6CAE2E2CBB7DC /* ActionCommand.swift */,
+				FBA26F5BABC5F61AF8724031 /* AppLocator.swift */,
+				6FF1252577E0B7CE60098468 /* DebugLog.swift */,
+				0FF6D6473E4E25AC8C9E6C53 /* IconProvider.swift */,
+				D208E885FA25BBA7F7D100CE /* MenuConfig.swift */,
+				1ED3B16160E34E99AC03B157 /* PathResolver.swift */,
+				92F8692FB92BB03654C397B6 /* SharedConfig.swift */,
+				2E54648F2D6EF3DD693FDFF0 /* TerminalLauncher.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B22908BF236B35977FF5F541 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7051870FB7E771907A87FE0A /* ActionsTabView.swift */,
+				512CC7DF81916956716BB5E0 /* ConfigTable.swift */,
+				11C2534B7FD06803B4FFF327 /* NewFileTabView.swift */,
+				8D5E9BA1DF88BB1D8372F122 /* OpenAppsTabView.swift */,
+				E1018F18C5C776ABBA1FE787 /* SettingsView.swift */,
+				52EDC838C9F56C3C0462B870 /* SetupTabView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DF58D1F533486F2CBF6B8534 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A7F04484CC2DCC6AD7B46AC6 /* ActionRunner.swift */,
+				841EDFCAE76C26392FC7659A /* ExtensionStatus.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E39ED21A8C4C6FB6F71B3F30 = {
+			isa = PBXGroup;
+			children = (
+				749BD2441BF20BF5595052A7 /* MacRightClick */,
+				36FB9109F65423A5E14D7082 /* MacRightClickFinderExtension */,
+				873CC08AB3882355EF277823 /* Shared */,
+				EFD61FEA8432772D4862F266 /* Frameworks */,
+				187F0A32F7DA507F5784CAAA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EFD61FEA8432772D4862F266 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD7EE86D8DBF7A3F17C13FAF /* FinderSync.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F67506A9D8A0FDA63448314 /* MacRightClickFinderExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F35833F874127431C4F7FE7F /* Build configuration list for PBXNativeTarget "MacRightClickFinderExtension" */;
+			buildPhases = (
+				F292E9E0651D66F3D37D6A6F /* Sources */,
+				4598DD4F7C14D3BBCA9E438C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacRightClickFinderExtension;
+			packageProductDependencies = (
+			);
+			productName = MacRightClickFinderExtension;
+			productReference = 00D81D23155C33DB1BFFCDF6 /* MacRightClickFinderExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		343E35B4FF6E994FC705DF86 /* MacRightClick */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A368F8C8271A44E212372E2 /* Build configuration list for PBXNativeTarget "MacRightClick" */;
+			buildPhases = (
+				645C883AEB6A6AF39E00281F /* Sources */,
+				B57548219FE4542F248CDCA9 /* Resources */,
+				BA217598559D4375B35E4600 /* Frameworks */,
+				EB90DEA8F356F15E5D63133E /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A33E883895FEE815E15F892 /* PBXTargetDependency */,
+			);
+			name = MacRightClick;
+			packageProductDependencies = (
+			);
+			productName = MacRightClick;
+			productReference = C1DB9807289470FCD747EA25 /* MacRightClick.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37FB147CDF8ECC69C4ACACEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1F67506A9D8A0FDA63448314 = {
+						DevelopmentTeam = 36LWH3ZXTR;
+						ProvisioningStyle = Automatic;
+					};
+					343E35B4FF6E994FC705DF86 = {
+						DevelopmentTeam = 36LWH3ZXTR;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 80F21A41826F02A8C163A62A /* Build configuration list for PBXProject "MacRightClick" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E39ED21A8C4C6FB6F71B3F30;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 187F0A32F7DA507F5784CAAA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				343E35B4FF6E994FC705DF86 /* MacRightClick */,
+				1F67506A9D8A0FDA63448314 /* MacRightClickFinderExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B57548219FE4542F248CDCA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				801A683E93E12D5335C8EFD6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		645C883AEB6A6AF39E00281F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D7BA59E674081DBE63E9958 /* ActionCommand.swift in Sources */,
+				3BF2B54D9BC729C2101F9ED3 /* ActionRunner.swift in Sources */,
+				00407E83976D54061CC25417 /* ActionsTabView.swift in Sources */,
+				906A9DE21540FC8A70C6E087 /* AppLocator.swift in Sources */,
+				53B05B1963FF5D7D3558819A /* ConfigStore.swift in Sources */,
+				99FB1F72F77FD1FE750502FD /* ConfigTable.swift in Sources */,
+				E010191DAEA600CEAAE84F67 /* DebugLog.swift in Sources */,
+				2E5F9412067E2202D4BB774D /* ExtensionStatus.swift in Sources */,
+				50C3D0F8AF8B48ECB5A65C87 /* IconProvider.swift in Sources */,
+				939C2C2FBF593701C31D75AE /* MacRightClickApp.swift in Sources */,
+				6C02B8549B967524BAFA3AAC /* MenuConfig.swift in Sources */,
+				15FA11EB587E749EFBCEA9B3 /* NewFileTabView.swift in Sources */,
+				82C7D91F5E2FBDA24F2E37DF /* OpenAppsTabView.swift in Sources */,
+				42EF2841CE3ED7376B972417 /* PathResolver.swift in Sources */,
+				C12C38B77D98A4600F250CB1 /* SettingsView.swift in Sources */,
+				C0C6D6F969B5C9ACDCF0304C /* SetupTabView.swift in Sources */,
+				C976FF84956834762131D419 /* SharedConfig.swift in Sources */,
+				AABFE2F08C5F59DA740C50BA /* TerminalLauncher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F292E9E0651D66F3D37D6A6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D40F77DB56E0B1BA113E9D4 /* ActionCommand.swift in Sources */,
+				2A80C80A5F346098F9098248 /* AppLocator.swift in Sources */,
+				1CD524D9EAA12CF7956B5EB8 /* DebugLog.swift in Sources */,
+				4E2E67C937B5FF26A77E141F /* ExtensionActionRunner.swift in Sources */,
+				47285C37ED92AEF424FFCBB0 /* FinderSync.swift in Sources */,
+				9D96B942EDA5BB64F5A0EF09 /* IconProvider.swift in Sources */,
+				27F502CCF68CBE14CA5A1B9D /* MenuBuilder.swift in Sources */,
+				F1C70663E051452B81EF9AE5 /* MenuCache.swift in Sources */,
+				17CF86A8CC5B28F257FC9AED /* MenuConfig.swift in Sources */,
+				CAE513D177188D9CADBB6B0F /* PathResolver.swift in Sources */,
+				15FFA8FDE7D8454F5C39C051 /* SharedConfig.swift in Sources */,
+				53BBCE1D6C66B9BB58E50CC3 /* TerminalLauncher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A33E883895FEE815E15F892 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F67506A9D8A0FDA63448314 /* MacRightClickFinderExtension */;
+			targetProxy = CED616AEF936C731E6326A52 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0C629211A26B15A3CC2E5184 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MacRightClick/MacRightClick.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacRightClick/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.macrightclick.app;
+				PRODUCT_NAME = MacRightClick;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		55F8DC9BB9AD7C8B36E2BC07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 36LWH3ZXTR;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1792F77F50FEA4D062C00E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MacRightClickFinderExtension/MacRightClickFinderExtension.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacRightClickFinderExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.macrightclick.app.FinderExtension;
+				PRODUCT_NAME = MacRightClickFinderExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DBB74449EC881FB81D1EDD51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MacRightClickFinderExtension/MacRightClickFinderExtension.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacRightClickFinderExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.macrightclick.app.FinderExtension;
+				PRODUCT_NAME = MacRightClickFinderExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		EAB29B959A6919699654BB4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MacRightClick/MacRightClick.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacRightClick/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.macrightclick.app;
+				PRODUCT_NAME = MacRightClick;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F0A906A9C02300EB788AAC99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 36LWH3ZXTR;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		80F21A41826F02A8C163A62A /* Build configuration list for PBXProject "MacRightClick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55F8DC9BB9AD7C8B36E2BC07 /* Debug */,
+				F0A906A9C02300EB788AAC99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8A368F8C8271A44E212372E2 /* Build configuration list for PBXNativeTarget "MacRightClick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C629211A26B15A3CC2E5184 /* Debug */,
+				EAB29B959A6919699654BB4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F35833F874127431C4F7FE7F /* Build configuration list for PBXNativeTarget "MacRightClickFinderExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1792F77F50FEA4D062C00E2 /* Debug */,
+				DBB74449EC881FB81D1EDD51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37FB147CDF8ECC69C4ACACEB /* Project object */;
+}

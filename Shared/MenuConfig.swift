@@ -171,37 +171,6 @@ struct ScriptItem: Identifiable, Codable, Equatable {
     var source: String
     var enabled: Bool
     var placement: Placement
-    var runInTerminal: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, source, enabled, placement, runInTerminal
-    }
-
-    init(
-        id: String,
-        name: String,
-        source: String,
-        enabled: Bool,
-        placement: Placement,
-        runInTerminal: Bool = false
-    ) {
-        self.id = id
-        self.name = name
-        self.source = source
-        self.enabled = enabled
-        self.placement = placement
-        self.runInTerminal = runInTerminal
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(String.self, forKey: .id)
-        name = try container.decode(String.self, forKey: .name)
-        source = try container.decode(String.self, forKey: .source)
-        enabled = try container.decode(Bool.self, forKey: .enabled)
-        placement = try container.decode(Placement.self, forKey: .placement)
-        runInTerminal = try container.decodeIfPresent(Bool.self, forKey: .runInTerminal) ?? false
-    }
 
     static let defaultSource = """
         # Finder folder is the working directory.
@@ -219,8 +188,7 @@ struct ScriptItem: Identifiable, Codable, Equatable {
             name: name,
             source: source,
             enabled: true,
-            placement: .submenu,
-            runInTerminal: false
+            placement: .submenu
         )
     }
 }

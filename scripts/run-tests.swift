@@ -153,24 +153,10 @@ struct LogicTests {
         expect(bashResult.stdout.split(separator: "\n").contains("md"), "bash sees EXT", bashResult.stdout)
 
         let legacyScriptJSON = """
-        {"id":"custom.script.old","name":"Legacy","kind":"python","source":"echo hi","enabled":true,"placement":"submenu"}
+        {"id":"custom.script.old","name":"Legacy","kind":"python","source":"echo hi","enabled":true,"placement":"submenu","runInTerminal":true}
         """.data(using: .utf8)!
         let legacyScript = try JSONDecoder().decode(ScriptItem.self, from: legacyScriptJSON)
         expect(legacyScript.name == "Legacy" && legacyScript.source == "echo hi", "legacy kind field is ignored")
-        expect(legacyScript.runInTerminal == false, "legacy script defaults In Terminal off")
-        expect(bashScript.runInTerminal == false, "new script defaults In Terminal off")
-        expect(ScriptRunner.shellEscape("it's") == "'it'\\''s'", "shell escape single quote")
-        let inline = ScriptRunner.terminalCommand(for: bashScript, directory: tmp, files: [file.path])
-        expect(inline.contains("printf '%s\\n' \"$FOLDER\" \"$FILE\" \"$FILENAME\" \"$BASENAME\" \"$EXT\" \"$MRC_DIR\" \"$1\""), "terminal command uses script text")
-        expect(inline.contains("export FOLDER="), "terminal command exports FOLDER")
-        expect(inline.contains("export FILE="), "terminal command exports FILE")
-        expect(inline.contains("cd "), "terminal command cds into folder")
-        expect(!inline.contains(".sh"), "terminal command does not load a temp script file")
-        expect(
-            TerminalLauncher.appleScriptEscape("say \"hi\"\nls\\") == "say \\\"hi\\\"\\nls\\\\",
-            "AppleScript escape quotes, newlines and backslashes",
-            TerminalLauncher.appleScriptEscape("say \"hi\"\nls\\")
-        )
 
         let previous = SharedConfig.configData()
         var custom = MenuConfig.default

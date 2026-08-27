@@ -221,22 +221,7 @@ final class MenuCache {
         var tokens: [String: String] = [:]
         let menu = NSMenu(title: "")
 
-        if !snap.fileSubmenu.isEmpty {
-            let submenu = NSMenu(title: "New File")
-            for item in snap.fileSubmenu {
-                submenu.addItem(menuItem(item, tokens: &tokens))
-            }
-            let parent = NSMenuItem(title: "New File", action: nil, keyEquivalent: "")
-            parent.image = snap.newFileIcon
-            parent.submenu = submenu
-            menu.addItem(parent)
-        }
-        for item in snap.fileMain {
-            menu.addItem(menuItem(item, tokens: &tokens))
-        }
-
         if !snap.actionMain.isEmpty || !snap.actionSub.isEmpty {
-            if !menu.items.isEmpty { menu.addItem(.separator()) }
             for item in snap.actionMain {
                 menu.addItem(menuItem(item, tokens: &tokens))
             }
@@ -252,25 +237,23 @@ final class MenuCache {
             }
         }
 
-        if !snap.scriptMain.isEmpty || !snap.scriptSub.isEmpty {
-            if !menu.items.isEmpty { menu.addItem(.separator()) }
-            for item in snap.scriptMain {
-                menu.addItem(menuItem(item, tokens: &tokens))
-            }
-            if !snap.scriptSub.isEmpty {
-                let submenu = NSMenu(title: "Scripts")
-                for item in snap.scriptSub {
+        if !snap.fileSubmenu.isEmpty || !snap.fileMain.isEmpty {
+            if !snap.fileSubmenu.isEmpty {
+                let submenu = NSMenu(title: "New File")
+                for item in snap.fileSubmenu {
                     submenu.addItem(menuItem(item, tokens: &tokens))
                 }
-                let parent = NSMenuItem(title: "Scripts", action: nil, keyEquivalent: "")
-                parent.image = snap.scriptsIcon
+                let parent = NSMenuItem(title: "New File", action: nil, keyEquivalent: "")
+                parent.image = snap.newFileIcon
                 parent.submenu = submenu
                 menu.addItem(parent)
+            }
+            for item in snap.fileMain {
+                menu.addItem(menuItem(item, tokens: &tokens))
             }
         }
 
         if !snap.appMain.isEmpty || !snap.appSub.isEmpty {
-            if !menu.items.isEmpty { menu.addItem(.separator()) }
             for item in snap.appMain {
                 menu.addItem(menuItem(item, tokens: &tokens))
             }
@@ -281,6 +264,22 @@ final class MenuCache {
                 }
                 let parent = NSMenuItem(title: "Open In", action: nil, keyEquivalent: "")
                 parent.image = snap.openInIcon
+                parent.submenu = submenu
+                menu.addItem(parent)
+            }
+        }
+
+        if !snap.scriptMain.isEmpty || !snap.scriptSub.isEmpty {
+            for item in snap.scriptMain {
+                menu.addItem(menuItem(item, tokens: &tokens))
+            }
+            if !snap.scriptSub.isEmpty {
+                let submenu = NSMenu(title: "Scripts")
+                for item in snap.scriptSub {
+                    submenu.addItem(menuItem(item, tokens: &tokens))
+                }
+                let parent = NSMenuItem(title: "Scripts", action: nil, keyEquivalent: "")
+                parent.image = snap.scriptsIcon
                 parent.submenu = submenu
                 menu.addItem(parent)
             }

@@ -19,15 +19,11 @@ struct ScriptsTabView: View {
                         .contentShape(Rectangle())
                         .onTapGesture(count: 2) { editor = .edit(item) }
                 }
-                TableColumn("In Terminal") { item in
-                    InTerminalCell(runInTerminal: $store.config.scripts[item: item].runInTerminal)
-                }
-                .width(ConfigTableWidth.inTerminal)
                 TableColumn("Main Menu") { item in
                     MainMenuCell(placement: $store.config.scripts[item: item].placement)
                 }
                 .width(ConfigTableWidth.mainMenu)
-                TableColumn("") { item in
+                TableColumn("Delete") { item in
                     RemoveCell(isCustom: true) { store.removeScript(id: item.id) }
                 }
                 .width(ConfigTableWidth.remove)
@@ -66,7 +62,7 @@ struct ScriptsTabView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Scripts")
                 .font(.title2.weight(.semibold))
-            Text("Bash scripts that run from Finder. Double-click a row to edit. Use macros such as $FOLDER for the containing folder. Check In Terminal to run in a Terminal window that stays open. Check Main Menu to pin an item to the top-level menu; otherwise it stays under Scripts.")
+            Text("Bash scripts that run from Finder. Double-click a row to edit. Use macros such as $FOLDER for the containing folder. Check Main Menu to pin an item to the top-level menu; otherwise it stays under Scripts.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }

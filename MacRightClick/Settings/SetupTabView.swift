@@ -1,4 +1,3 @@
-import AppKit
 import SwiftUI
 
 struct SetupTabView: View {
@@ -65,28 +64,12 @@ struct SetupTabView: View {
                     .padding(8)
                 }
 
-                GroupBox("Debug log") {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Toggle("Write Finder menu timings to /tmp/macrightclick-debug.log", isOn: debugBinding)
-                        Text("Right-click a few times in Finder, then send that log file so the slow step can be identified.")
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                        HStack {
-                            Button("Clear log") { DebugLog.clear() }
-                            Button("Reveal log") {
-                                NSWorkspace.shared.activateFileViewerSelecting([DebugLog.logURL])
-                            }
-                        }
-                    }
-                    .padding(8)
-                }
-
                 GroupBox("Notes") {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("A Development Team must sign the app. Ad-hoc builds from DerivedData will not appear in System Settings.")
                         Text("Open Terminal uses macOS Launch Services, so it does not ask to control Terminal.")
                         Text("Missing apps stay in the Open Apps tab and are hidden from Finder until they are installed.")
-                        Text("Scripts run in the MacRightClick app so they have a normal user environment. Selected paths are arguments; the Finder folder is the working directory. In Terminal opens a window, runs the script, and leaves the shell open.")
+                        Text("Scripts run in the MacRightClick app so they have a normal user environment. Selected paths are arguments; the Finder folder is the working directory.")
                     }
                     .font(.callout)
                     .foregroundStyle(.secondary)
@@ -141,13 +124,6 @@ struct SetupTabView: View {
         case .notRegistered:
             return "Install the app to /Applications, then register it. It will not show in System Settings until PluginKit sees the .appex."
         }
-    }
-
-    private var debugBinding: Binding<Bool> {
-        Binding(
-            get: { DebugLog.isEnabled },
-            set: { DebugLog.isEnabled = $0 }
-        )
     }
 
     private func labeledStep(_ number: Int, _ text: String) -> some View {

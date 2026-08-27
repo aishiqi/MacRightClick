@@ -127,33 +127,6 @@ enum ScriptRunner {
         )
     }
 
-    /// Opens Terminal and runs the script text in that shell — the text is sent
-    /// to Terminal as is, never through a file on disk. The window stays open at
-    /// the prompt when the commands finish.
-    static func runInTerminal(_ script: ScriptItem, directory: URL?, files: [String]) {
-        TerminalLauncher.run(terminalCommand(for: script, directory: directory, files: files))
-    }
-
-    static func terminalCommand(for script: ScriptItem, directory: URL?, files: [String]) -> String {
-        let workDir = directory ?? PathResolver.desktopDirectory ?? URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let macros = ScriptMacros.resolve(directory: workDir, files: files)
-        let exports = ScriptMacros.environment(from: macros)
-            .sorted { $0.key < $1.key }
-            .map { "export \($0.key)=\(shellEscape($0.value))" }
-            .joined(separator: "\n")
-        let fileArgs = files.map(shellEscape).joined(separator: " ")
-        return """
-        cd \(shellEscape(workDir.path)) || exit 1
-        \(exports)
-        set -- \(fileArgs)
-        \(script.source)
-        """
-    }
-
-    static func shellEscape(_ value: String) -> String {
-        "'" + value.replacingOccurrences(of: "'", with: "'\\''") + "'"
-    }
-
     private static func read(_ pipe: Pipe) -> String {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         return String(data: data, encoding: .utf8) ?? ""

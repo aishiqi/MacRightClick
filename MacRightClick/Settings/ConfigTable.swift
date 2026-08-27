@@ -18,8 +18,7 @@ extension Binding {
 enum ConfigTableWidth {
     static let enabled: CGFloat = 62
     static let mainMenu: CGFloat = 80
-    static let inTerminal: CGFloat = 86
-    static let remove: CGFloat = 28
+    static let remove: CGFloat = 56
 }
 
 struct ConfigNameCell: View {
@@ -83,19 +82,6 @@ struct MainMenuCell: View {
             get: { placement == .mainMenu },
             set: { placement = $0 ? .mainMenu : .submenu }
         )
-    }
-}
-
-struct InTerminalCell: View {
-    @Binding var runInTerminal: Bool
-
-    var body: some View {
-        Toggle("In Terminal", isOn: $runInTerminal)
-            .toggleStyle(.checkbox)
-            .labelsHidden()
-            .controlSize(.small)
-            .help("Run this script in Terminal and keep the window open")
-            .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 

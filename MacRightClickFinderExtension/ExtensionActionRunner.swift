@@ -63,13 +63,9 @@ enum ExtensionActionRunner {
             let handedOff = handOffToApp(ActionCommand(kind: .runScript, id: command.id, paths: files))
             if !handedOff, let script = config.scripts.first(where: { $0.id == command.id }) {
                 let directory = PathResolver.targetDirectory(selected: selected, targeted: targeted)
-                if script.runInTerminal {
-                    ScriptRunner.runInTerminal(script, directory: directory, files: files)
-                } else {
-                    let result = ScriptRunner.run(script, directory: directory, files: files)
-                    if result.exitCode != 0 {
-                        NSLog("MacRightClick script “\(script.name)” failed (\(result.exitCode)): \(result.stderr)")
-                    }
+                let result = ScriptRunner.run(script, directory: directory, files: files)
+                if result.exitCode != 0 {
+                    NSLog("MacRightClick script “\(script.name)” failed (\(result.exitCode)): \(result.stderr)")
                 }
             }
         }

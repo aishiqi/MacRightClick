@@ -27,7 +27,7 @@ struct NewFileTabView: View {
                     MainMenuCell(placement: $store.config.fileTypes[item: item].placement)
                 }
                 .width(ConfigTableWidth.mainMenu)
-                TableColumn("") { item in
+                TableColumn("Delete") { item in
                     RemoveCell(isCustom: !item.isPreset) { store.removeFileType(id: item.id) }
                 }
                 .width(ConfigTableWidth.remove)

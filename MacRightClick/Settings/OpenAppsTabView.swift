@@ -39,7 +39,7 @@ struct OpenAppsTabView: View {
                     MainMenuCell(placement: $store.config.apps[item: item].placement)
                 }
                 .width(ConfigTableWidth.mainMenu)
-                TableColumn("") { item in
+                TableColumn("Delete") { item in
                     RemoveCell(isCustom: !item.isPreset) { store.removeApp(id: item.id) }
                 }
                 .width(ConfigTableWidth.remove)

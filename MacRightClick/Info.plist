@@ -36,7 +36,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>MacRightClick controls Terminal to open a window at the selected Finder location and to run scripts you enable In Terminal.</string>
+	<string>MacRightClick controls Terminal to open a window or tab at the selected Finder location.</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>

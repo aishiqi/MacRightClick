@@ -85,10 +85,6 @@ enum ActionRunner {
     private static func runScript(_ script: ScriptItem, paths: [String]) {
         let urls = paths.map { URL(fileURLWithPath: $0) }
         let directory = PathResolver.targetDirectory(selected: urls, targeted: nil)
-        if script.runInTerminal {
-            ScriptRunner.runInTerminal(script, directory: directory, files: paths)
-            return
-        }
         DispatchQueue.global(qos: .userInitiated).async {
             let result = ScriptRunner.run(script, directory: directory, files: paths)
             if result.exitCode != 0 {

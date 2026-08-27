@@ -54,7 +54,7 @@ enum ExtensionActionRunner {
             let urls = PathResolver.selectedOrTargeted(selected: selected, targeted: targeted)
             open(urls: urls, with: appURL)
 
-        case .openTerminal, .openTerminalTab:
+        case .openTerminal:
             guard let directory = PathResolver.targetDirectory(selected: selected, targeted: targeted) else { return }
             TerminalLauncher.open(at: directory.path)
 
@@ -81,8 +81,6 @@ enum ExtensionActionRunner {
             perform(ActionCommand(kind: .copyDirPath, id: nil, paths: []), in: context)
         } else if title == ActionKind.openTerminal.title {
             perform(ActionCommand(kind: .openTerminal, id: nil, paths: []), in: context)
-        } else if title == ActionKind.openTerminalTab.title {
-            perform(ActionCommand(kind: .openTerminalTab, id: nil, paths: []), in: context)
         } else if let fileType = config.fileTypes.first(where: { title == $0.name || title == "New \($0.name)" }) {
             perform(ActionCommand(kind: .newFile, id: fileType.id, paths: []), in: context)
         } else if let app = config.apps.first(where: { title == $0.name || title == "Open in \($0.name)" }) {

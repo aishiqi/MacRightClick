@@ -17,11 +17,7 @@ final class ConfigStore: ObservableObject {
 
     init() {
         config = SharedConfig.load()
-        let seenFirstLaunch = UserDefaults.standard.bool(forKey: "didShowFirstLaunch")
-        selectedTab = seenFirstLaunch ? .newFile : .setup
-        if !seenFirstLaunch {
-            UserDefaults.standard.set(true, forKey: "didShowFirstLaunch")
-        }
+        selectedTab = ExtensionStatus.isEnabled() ? .newFile : .setup
     }
 
     func addFileType(name: String, fileName: String) {
@@ -52,9 +48,5 @@ final class ConfigStore: ObservableObject {
 
     func removeScript(id: String) {
         config.scripts.removeAll { $0.id == id }
-    }
-
-    func resetToDefaults() {
-        config = .default
     }
 }

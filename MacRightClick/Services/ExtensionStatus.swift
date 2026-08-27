@@ -1,4 +1,3 @@
-import AppKit
 import Foundation
 import FinderSync
 
@@ -77,17 +76,28 @@ enum ExtensionStatus {
     static func installRegisterAndEnable() throws {
         let installed = try installToApplications()
         _ = registerExtension(in: installed)
-        showSystemManagementInterface()
+        if state() != .enabled {
+            showSystemManagementInterface()
+        }
+    }
+
+    @discardableResult
+    static func disableExtension() -> String {
+        let log = runPluginKit(["-e", "ignore", "-i", extensionBundleID])
+        terminateExtension()
+        return log
     }
 
     static func showSystemManagementInterface() {
         FIFinderSyncController.showExtensionManagementInterface()
     }
 
-    static func openLoginItemsSettings() {
-        if let url = URL(string: "x-apple.systempreferences:com.apple.LoginItems-Settings.extension") {
-            NSWorkspace.shared.open(url)
-        }
+    private static func terminateExtension() {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
+        process.arguments = ["MacRightClickFinderExtension"]
+        try? process.run()
+        process.waitUntilExit()
     }
 
     private static func registerWithLaunchServices(_ appURL: URL) {

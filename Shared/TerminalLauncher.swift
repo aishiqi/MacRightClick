@@ -5,7 +5,6 @@ enum TerminalLauncher {
 
     /// Opens Terminal at `path` without Apple Events, so macOS does not show
     /// the “wants to control Terminal” Automation dialog.
-    /// A new window is used; a new tab requires AppleScript and that prompt.
     static func open(at path: String) {
         let directory = URL(fileURLWithPath: path, isDirectory: true)
         if let terminal = NSWorkspace.shared.urlForApplication(withBundleIdentifier: terminalBundleID) {

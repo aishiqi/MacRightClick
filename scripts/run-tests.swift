@@ -158,6 +158,13 @@ struct LogicTests {
         let legacyScript = try JSONDecoder().decode(ScriptItem.self, from: legacyScriptJSON)
         expect(legacyScript.name == "Legacy" && legacyScript.source == "echo hi", "legacy kind field is ignored")
 
+        let tabActionJSON = """
+        {"fileTypes":[],"apps":[],"actions":[{"id":"action.openTerminal","kind":"openTerminal","enabled":true,"placement":"mainMenu"},{"id":"action.openTerminalTab","kind":"openTerminalTab","enabled":true,"placement":"mainMenu"}]}
+        """.data(using: .utf8)!
+        let decodedTab = try JSONDecoder().decode(MenuConfig.self, from: tabActionJSON)
+        expect(decodedTab.actions.count == 1, "removed Open Terminal (Tab) is dropped")
+        expect(decodedTab.actions.first?.kind == .openTerminal, "Open Terminal is kept")
+
         let previous = SharedConfig.configData()
         var custom = MenuConfig.default
         custom.fileTypes[0].enabled = false

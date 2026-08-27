@@ -205,7 +205,6 @@ final class MenuCache {
         case .copyFilePath: kind = .copyFilePath
         case .copyDirPath: kind = .copyDirPath
         case .openTerminal: kind = .openTerminal
-        case .openTerminalTab: kind = .openTerminalTab
         }
         return Item(
             title: item.kind.title,

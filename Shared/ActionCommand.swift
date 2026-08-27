@@ -7,7 +7,6 @@ struct ActionCommand: Equatable {
         case copyFilePath
         case copyDirPath
         case openTerminal
-        case openTerminalTab
         case openApp
         case runScript
     }

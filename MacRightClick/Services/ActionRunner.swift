@@ -25,7 +25,7 @@ enum ActionRunner {
         case .copyDirPath:
             copyToPasteboard(command.paths)
 
-        case .openTerminal, .openTerminalTab:
+        case .openTerminal:
             guard let directory = firstDirectory(command.paths) else { return }
             TerminalLauncher.open(at: directory.path)
 

@@ -124,7 +124,6 @@ enum ActionKind: String, Codable, CaseIterable, Identifiable {
     case copyFilePath
     case copyDirPath
     case openTerminal
-    case openTerminalTab
 
     var id: String { rawValue }
 
@@ -134,7 +133,6 @@ enum ActionKind: String, Codable, CaseIterable, Identifiable {
         case .copyFilePath: return "Copy File Path"
         case .copyDirPath: return "Copy Dir Path"
         case .openTerminal: return "Open Terminal"
-        case .openTerminalTab: return "Open Terminal (Tab)"
         }
     }
 
@@ -144,7 +142,6 @@ enum ActionKind: String, Codable, CaseIterable, Identifiable {
         case .copyFilePath: return "doc.on.clipboard"
         case .copyDirPath: return "folder"
         case .openTerminal: return "terminal"
-        case .openTerminalTab: return "rectangle.split.1x2"
         }
     }
 }
@@ -173,13 +170,17 @@ struct ScriptItem: Identifiable, Codable, Equatable {
     var placement: Placement
 
     static let defaultSource = """
-        # Finder folder is the working directory.
-        # $FOLDER  containing folder of a file, or the folder itself
-        # $FILE    first selected path
-        # Also: $FILENAME $BASENAME $EXT $FOLDERNAME $PARENT $FILES $FOLDERS
-        echo "Folder: $FOLDER"
-        echo "File: $FILE"
-        printf '%s\\n' "$@"
+        {
+          printf '$FOLDER=%s\\n' "$FOLDER"
+          printf '$FILE=%s\\n' "$FILE"
+          printf '$FILENAME=%s\\n' "$FILENAME"
+          printf '$BASENAME=%s\\n' "$BASENAME"
+          printf '$EXT=%s\\n' "$EXT"
+          printf '$FOLDERNAME=%s\\n' "$FOLDERNAME"
+          printf '$PARENT=%s\\n' "$PARENT"
+          printf '$FILES=%s\\n' "$FILES"
+          printf '$FOLDERS=%s\\n' "$FOLDERS"
+        } > helloworld.txt
         """
 
     static func custom(name: String, source: String) -> ScriptItem {
@@ -214,7 +215,8 @@ struct MenuConfig: Codable, Equatable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         fileTypes = try container.decode([FileTypeItem].self, forKey: .fileTypes)
         apps = try container.decode([AppItem].self, forKey: .apps)
-        actions = try container.decode([ActionItem].self, forKey: .actions)
+        let rawActions = try container.decodeIfPresent([FailableDecodable<ActionItem>].self, forKey: .actions) ?? []
+        actions = rawActions.compactMap(\.value)
         scripts = try container.decodeIfPresent([ScriptItem].self, forKey: .scripts) ?? []
     }
 
@@ -239,5 +241,13 @@ struct MenuConfig: Codable, Equatable {
         merged.actions.append(contentsOf: ActionItem.presets.filter { !existingActionIDs.contains($0.id) })
 
         return merged
+    }
+}
+
+private struct FailableDecodable<T: Decodable>: Decodable {
+    let value: T?
+
+    init(from decoder: Decoder) throws {
+        value = try? T(from: decoder)
     }
 }

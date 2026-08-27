@@ -32,6 +32,10 @@ enum ActionRunner {
         case .openApp:
             guard let app = config.apps.first(where: { $0.id == command.id }) else { return }
             open(app: app, paths: command.paths)
+
+        case .runScript:
+            guard let script = config.scripts.first(where: { $0.id == command.id }) else { return }
+            runScript(script, paths: command.paths)
         }
     }
 
@@ -76,6 +80,36 @@ enum ActionRunner {
         } else {
             NSWorkspace.shared.open(urls, withApplicationAt: appURL, configuration: configuration) { _, _ in }
         }
+    }
+
+    private static func runScript(_ script: ScriptItem, paths: [String]) {
+        let urls = paths.map { URL(fileURLWithPath: $0) }
+        let directory = PathResolver.targetDirectory(selected: urls, targeted: nil)
+        if script.runInTerminal {
+            ScriptRunner.runInTerminal(script, directory: directory, files: paths)
+            return
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            let result = ScriptRunner.run(script, directory: directory, files: paths)
+            if result.exitCode != 0 {
+                DispatchQueue.main.async {
+                    presentScriptFailure(name: script.name, result: result)
+                }
+            }
+        }
+    }
+
+    private static func presentScriptFailure(name: String, result: ScriptRunner.Result) {
+        let alert = NSAlert()
+        alert.alertStyle = .warning
+        alert.messageText = "“\(name)” failed"
+        let output = [result.stderr, result.stdout]
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: "\n\n")
+        alert.informativeText = output.isEmpty ? "Exit code \(result.exitCode)." : output
+        NSApp.activate(ignoringOtherApps: true)
+        alert.runModal()
     }
 
 }

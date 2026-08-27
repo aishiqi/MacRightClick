@@ -57,6 +57,21 @@ enum ExtensionActionRunner {
         case .openTerminal, .openTerminalTab:
             guard let directory = PathResolver.targetDirectory(selected: selected, targeted: targeted) else { return }
             TerminalLauncher.open(at: directory.path)
+
+        case .runScript:
+            let files = PathResolver.filePaths(selected: selected, targeted: targeted)
+            let handedOff = handOffToApp(ActionCommand(kind: .runScript, id: command.id, paths: files))
+            if !handedOff, let script = config.scripts.first(where: { $0.id == command.id }) {
+                let directory = PathResolver.targetDirectory(selected: selected, targeted: targeted)
+                if script.runInTerminal {
+                    ScriptRunner.runInTerminal(script, directory: directory, files: files)
+                } else {
+                    let result = ScriptRunner.run(script, directory: directory, files: files)
+                    if result.exitCode != 0 {
+                        NSLog("MacRightClick script “\(script.name)” failed (\(result.exitCode)): \(result.stderr)")
+                    }
+                }
+            }
         }
     }
 
@@ -76,6 +91,8 @@ enum ExtensionActionRunner {
             perform(ActionCommand(kind: .newFile, id: fileType.id, paths: []), in: context)
         } else if let app = config.apps.first(where: { title == $0.name || title == "Open in \($0.name)" }) {
             perform(ActionCommand(kind: .openApp, id: app.id, paths: []), in: context)
+        } else if let script = config.scripts.first(where: { title == $0.name }) {
+            perform(ActionCommand(kind: .runScript, id: script.id, paths: []), in: context)
         }
     }
 
@@ -127,6 +144,22 @@ enum ExtensionActionRunner {
         } else {
             NSWorkspace.shared.open(urls, withApplicationAt: appURL, configuration: configuration, completionHandler: nil)
         }
+    }
+
+    /// Scripts need a normal user environment, so they run in the unsandboxed
+    /// host app. `activates` stays off so a right-click does not steal focus.
+    @discardableResult
+    private static func handOffToApp(_ command: ActionCommand) -> Bool {
+        guard let url = command.url() else { return false }
+        let host = Bundle.main.bundleURL
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        guard FileManager.default.fileExists(atPath: host.path) else { return false }
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.activates = false
+        NSWorkspace.shared.open([url], withApplicationAt: host, configuration: configuration, completionHandler: nil)
+        return true
     }
 
     private static func escape(_ value: String) -> String {

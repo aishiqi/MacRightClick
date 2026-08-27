@@ -4,6 +4,7 @@ enum SettingsTab: Hashable {
     case newFile
     case openApps
     case actions
+    case scripts
     case setup
 }
 
@@ -37,6 +38,20 @@ final class ConfigStore: ObservableObject {
 
     func removeApp(id: String) {
         config.apps.removeAll { $0.id == id && !$0.isPreset }
+    }
+
+    func addScript(name: String, source: String) {
+        config.scripts.append(.custom(name: name, source: source))
+    }
+
+    func updateScript(id: String, name: String, source: String) {
+        guard let index = config.scripts.firstIndex(where: { $0.id == id }) else { return }
+        config.scripts[index].name = name
+        config.scripts[index].source = source
+    }
+
+    func removeScript(id: String) {
+        config.scripts.removeAll { $0.id == id }
     }
 
     func resetToDefaults() {

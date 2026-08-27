@@ -9,6 +9,7 @@ struct ActionCommand: Equatable {
         case openTerminal
         case openTerminalTab
         case openApp
+        case runScript
     }
 
     var kind: Kind

@@ -86,6 +86,7 @@ struct SetupTabView: View {
                         Text("A Development Team must sign the app. Ad-hoc builds from DerivedData will not appear in System Settings.")
                         Text("Open Terminal uses macOS Launch Services, so it does not ask to control Terminal.")
                         Text("Missing apps stay in the Open Apps tab and are hidden from Finder until they are installed.")
+                        Text("Scripts run in the MacRightClick app so they have a normal user environment. Selected paths are arguments; the Finder folder is the working directory. In Terminal opens a window, runs the script, and leaves the shell open.")
                     }
                     .font(.callout)
                     .foregroundStyle(.secondary)

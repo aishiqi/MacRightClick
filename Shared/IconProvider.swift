@@ -65,6 +65,10 @@ enum IconProvider {
         symbol(kind.symbolName, size: size)
     }
 
+    static func scriptIcon(size: NSSize = menuSize) -> NSImage {
+        symbol("terminal", size: size)
+    }
+
     static func symbol(_ name: String, size: NSSize) -> NSImage {
         let key = "sym:\(name):\(Int(size.width)):\(menuRasterPixels)" as NSString
         if let cached = cache.object(forKey: key) { return cached }

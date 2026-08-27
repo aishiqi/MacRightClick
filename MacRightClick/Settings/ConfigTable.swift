@@ -18,6 +18,7 @@ extension Binding {
 enum ConfigTableWidth {
     static let enabled: CGFloat = 62
     static let mainMenu: CGFloat = 80
+    static let inTerminal: CGFloat = 86
     static let remove: CGFloat = 28
 }
 
@@ -85,6 +86,19 @@ struct MainMenuCell: View {
     }
 }
 
+struct InTerminalCell: View {
+    @Binding var runInTerminal: Bool
+
+    var body: some View {
+        Toggle("In Terminal", isOn: $runInTerminal)
+            .toggleStyle(.checkbox)
+            .labelsHidden()
+            .controlSize(.small)
+            .help("Run this script in Terminal and keep the window open")
+            .frame(maxWidth: .infinity, alignment: .center)
+    }
+}
+
 struct RemoveCell: View {
     let isCustom: Bool
     let onDelete: () -> Void
@@ -98,6 +112,72 @@ struct RemoveCell: View {
             .buttonStyle(.borderless)
             .help("Remove custom item")
             .frame(maxWidth: .infinity, alignment: .center)
+        }
+    }
+}
+
+/// Installs a window-local double-click monitor that maps onto the nearest
+/// `NSTableView`, so a SwiftUI `Table` row can open an editor.
+struct TableRowDoubleClick: NSViewRepresentable {
+    let onDoubleClick: (Int) -> Void
+
+    func makeNSView(context: Context) -> NSView {
+        context.coordinator.view
+    }
+
+    func updateNSView(_ nsView: NSView, context: Context) {
+        context.coordinator.onDoubleClick = onDoubleClick
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onDoubleClick: onDoubleClick)
+    }
+
+    final class Coordinator {
+        var onDoubleClick: (Int) -> Void
+        let view = NSView()
+        private var monitor: Any?
+
+        init(onDoubleClick: @escaping (Int) -> Void) {
+            self.onDoubleClick = onDoubleClick
+            view.setAccessibilityHidden(true)
+            monitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseDown) { [weak self] event in
+                self?.handle(event)
+                return event
+            }
+        }
+
+        deinit {
+            if let monitor {
+                NSEvent.removeMonitor(monitor)
+            }
+        }
+
+        private func handle(_ event: NSEvent) {
+            guard event.clickCount == 2, event.window === view.window else { return }
+            guard let tableView = nearestTableView() else { return }
+            let point = tableView.convert(event.locationInWindow, from: nil)
+            let row = tableView.row(at: point)
+            guard row >= 0 else { return }
+            if let hit = tableView.hitTest(point), hit is NSControl { return }
+            onDoubleClick(row)
+        }
+
+        private func nearestTableView() -> NSTableView? {
+            var current: NSView? = view.superview
+            while let node = current {
+                if let table = findTableView(in: node) { return table }
+                current = node.superview
+            }
+            return nil
+        }
+
+        private func findTableView(in view: NSView) -> NSTableView? {
+            if let table = view as? NSTableView { return table }
+            for child in view.subviews {
+                if let table = findTableView(in: child) { return table }
+            }
+            return nil
         }
     }
 }

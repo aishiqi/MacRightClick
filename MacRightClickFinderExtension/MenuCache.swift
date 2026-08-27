@@ -21,8 +21,11 @@ final class MenuCache {
         var actionSub: [Item]
         var appMain: [Item]
         var appSub: [Item]
+        var scriptMain: [Item]
+        var scriptSub: [Item]
         var newFileIcon: NSImage
         var actionsIcon: NSImage
+        var scriptsIcon: NSImage
         var openInIcon: NSImage
     }
 
@@ -137,6 +140,7 @@ final class MenuCache {
         DebugLog.measure("MenuCache.makeSnapshot") {
         let fileEnabled = config.fileTypes.filter(\.enabled)
         let actionEnabled = config.actions.filter(\.enabled)
+        let scriptEnabled = config.scripts.filter(\.enabled)
         let appEnabled = DebugLog.measure("filter installed apps") {
             config.apps.filter { $0.enabled && AppLocator.isInstalled($0) }
         }
@@ -172,8 +176,23 @@ final class MenuCache {
                     token: ActionCommand(kind: .openApp, id: item.id, paths: []).token()
                 )
             },
+            scriptMain: scriptEnabled.filter { $0.placement == .mainMenu }.map { item in
+                Item(
+                    title: item.name,
+                    image: IconProvider.scriptIcon(),
+                    token: ActionCommand(kind: .runScript, id: item.id, paths: []).token()
+                )
+            },
+            scriptSub: scriptEnabled.filter { $0.placement == .submenu }.map { item in
+                Item(
+                    title: item.name,
+                    image: IconProvider.scriptIcon(),
+                    token: ActionCommand(kind: .runScript, id: item.id, paths: []).token()
+                )
+            },
             newFileIcon: IconProvider.symbol("doc.badge.plus", size: IconProvider.menuSize),
             actionsIcon: IconProvider.symbol("bolt", size: IconProvider.menuSize),
+            scriptsIcon: IconProvider.symbol("terminal", size: IconProvider.menuSize),
             openInIcon: IconProvider.symbol("arrow.up.forward.app", size: IconProvider.menuSize)
         )
         }
@@ -228,6 +247,23 @@ final class MenuCache {
                 }
                 let parent = NSMenuItem(title: "Actions", action: nil, keyEquivalent: "")
                 parent.image = snap.actionsIcon
+                parent.submenu = submenu
+                menu.addItem(parent)
+            }
+        }
+
+        if !snap.scriptMain.isEmpty || !snap.scriptSub.isEmpty {
+            if !menu.items.isEmpty { menu.addItem(.separator()) }
+            for item in snap.scriptMain {
+                menu.addItem(menuItem(item, tokens: &tokens))
+            }
+            if !snap.scriptSub.isEmpty {
+                let submenu = NSMenu(title: "Scripts")
+                for item in snap.scriptSub {
+                    submenu.addItem(menuItem(item, tokens: &tokens))
+                }
+                let parent = NSMenuItem(title: "Scripts", action: nil, keyEquivalent: "")
+                parent.image = snap.scriptsIcon
                 parent.submenu = submenu
                 menu.addItem(parent)
             }

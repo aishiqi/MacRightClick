@@ -41,6 +41,41 @@ struct LogicTests {
         expect(PathResolver.filePaths(selected: [file], targeted: tmp) == [file.path], "filePaths uses selection")
         expect(PathResolver.dirPaths(selected: [file], targeted: tmp) == [tmp.path], "dirPaths of file is parent")
         expect(PathResolver.dirPaths(selected: [folder], targeted: tmp) == [folder.path], "dirPaths of folder is itself")
+        expect(PathResolver.folderPath(for: file.path) == tmp.path, "folderPath of file is parent")
+        expect(PathResolver.folderPath(for: folder.path) == folder.path, "folderPath of folder is itself")
+
+        let fileMacros = ScriptMacros.resolve(directory: tmp, files: [file.path])
+        expect(fileMacros.file == file.path, "FILE is selected file")
+        expect(fileMacros.folder == tmp.path, "FOLDER of file is parent")
+        expect(fileMacros.filename == "readme.md", "FILENAME")
+        expect(fileMacros.basename == "readme", "BASENAME")
+        expect(fileMacros.ext == "md", "EXT")
+        expect(fileMacros.folderName == tmp.lastPathComponent, "FOLDERNAME")
+        expect(fileMacros.parent == tmp.deletingLastPathComponent().path, "PARENT of file folder")
+        expect(fileMacros.files == [file.path], "FILES is selection")
+        expect(fileMacros.folders == [tmp.path], "FOLDERS of file is parent")
+
+        let folderMacros = ScriptMacros.resolve(directory: folder, files: [folder.path])
+        expect(folderMacros.file == folder.path, "FILE of folder is itself")
+        expect(folderMacros.folder == folder.path, "FOLDER of folder is itself")
+        expect(folderMacros.filename == "src", "FILENAME of folder")
+        expect(folderMacros.basename == "src", "BASENAME of folder")
+        expect(folderMacros.ext == "", "EXT of folder is empty")
+        expect(folderMacros.folderName == "src", "FOLDERNAME of folder")
+
+        let multiMacros = ScriptMacros.resolve(directory: tmp, files: [file.path, folder.path])
+        expect(multiMacros.file == file.path, "FILE uses first selection")
+        expect(multiMacros.folder == tmp.path, "FOLDER uses first selection")
+        expect(multiMacros.files == [file.path, folder.path], "FILES keeps order")
+        expect(multiMacros.folders == [tmp.path, folder.path], "FOLDERS matches each item")
+
+        let emptyMacros = ScriptMacros.resolve(directory: tmp, files: [])
+        expect(emptyMacros.file == tmp.path && emptyMacros.folder == tmp.path, "empty selection uses directory")
+        expect(ScriptMacros.environment(from: fileMacros)["MRC_DIR"] == tmp.path, "MRC_DIR aliases FOLDER")
+        expect(ScriptMacros.environment(from: fileMacros)["FOLDER"] == tmp.path, "FOLDER is exported")
+
+        let hidden = ScriptMacros.resolve(directory: tmp, files: [tmp.appendingPathComponent(".gitignore").path])
+        expect(hidden.filename == ".gitignore" && hidden.basename == ".gitignore" && hidden.ext == "", "dotfile keeps name")
 
         let firstSwift = PathResolver.uniqueURL(in: tmp, preferredName: "untitled.swift")
         expect(firstSwift.lastPathComponent == "untitled.swift", "unique untitled.swift")
@@ -71,10 +106,20 @@ struct LogicTests {
         let fromToken = ActionCommand.from(token: token)
         expect(fromToken?.kind == .openApp && fromToken?.id == "app.cursor", "token round-trip")
 
+        let scriptCommand = ActionCommand(kind: .runScript, id: "custom.script.1", paths: [tmp.path, file.path])
+        let scriptURL = scriptCommand.url()
+        let parsedScript = scriptURL.flatMap(ActionCommand.from(url:))
+        expect(parsedScript?.kind == .runScript, "script command kind")
+        expect(parsedScript?.id == "custom.script.1", "script command id")
+        expect(parsedScript?.paths == [tmp.path, file.path], "script command paths")
+        let scriptToken = ActionCommand(kind: .runScript, id: "custom.script.1", paths: []).token()
+        expect(ActionCommand.from(token: scriptToken)?.kind == .runScript, "script token kind")
+
         let config = MenuConfig.default
         expect(config.fileTypes.count == FileTypeItem.presets.count, "file type presets")
         expect(config.apps.count == AppItem.presets.count, "app presets")
         expect(config.actions.count == ActionKind.allCases.count, "action presets")
+        expect(config.scripts.isEmpty, "default has no scripts")
         expect(config.fileTypes.contains { $0.fileName == "untitled.swift" && $0.placement == .submenu }, "swift is submenu")
         expect(config.actions.allSatisfy { $0.placement == .mainMenu }, "actions default to main menu")
         expect(config.fileTypes.contains { $0.fileName == "Dockerfile" }, "Dockerfile preset")
@@ -87,6 +132,45 @@ struct LogicTests {
         expect(stale.fileTypes.count == FileTypeItem.presets.count, "merge adds missing file presets")
         expect(stale.apps.count == AppItem.presets.count, "merge adds missing app presets")
         expect(stale.actions.count == ActionItem.presets.count, "merge adds missing actions")
+        expect(stale.scripts.isEmpty, "merge keeps empty scripts")
+
+        let oldJSON = """
+        {"fileTypes":[],"apps":[],"actions":[]}
+        """.data(using: .utf8)!
+        let decodedOld = try JSONDecoder().decode(MenuConfig.self, from: oldJSON)
+        expect(decodedOld.scripts.isEmpty, "old config without scripts decodes")
+
+        let bashScript = ScriptItem.custom(
+            name: "Echo",
+            source: "printf '%s\\n' \"$FOLDER\" \"$FILE\" \"$FILENAME\" \"$BASENAME\" \"$EXT\" \"$MRC_DIR\" \"$1\""
+        )
+        let bashResult = ScriptRunner.run(bashScript, directory: tmp, files: [file.path])
+        expect(bashResult.exitCode == 0, "bash script exit 0", bashResult.stderr)
+        expect(bashResult.stdout.contains(tmp.path), "bash sees FOLDER", bashResult.stdout)
+        expect(bashResult.stdout.contains(file.path), "bash sees FILE", bashResult.stdout)
+        expect(bashResult.stdout.contains("readme.md"), "bash sees FILENAME", bashResult.stdout)
+        expect(bashResult.stdout.contains("readme"), "bash sees BASENAME", bashResult.stdout)
+        expect(bashResult.stdout.split(separator: "\n").contains("md"), "bash sees EXT", bashResult.stdout)
+
+        let legacyScriptJSON = """
+        {"id":"custom.script.old","name":"Legacy","kind":"python","source":"echo hi","enabled":true,"placement":"submenu"}
+        """.data(using: .utf8)!
+        let legacyScript = try JSONDecoder().decode(ScriptItem.self, from: legacyScriptJSON)
+        expect(legacyScript.name == "Legacy" && legacyScript.source == "echo hi", "legacy kind field is ignored")
+        expect(legacyScript.runInTerminal == false, "legacy script defaults In Terminal off")
+        expect(bashScript.runInTerminal == false, "new script defaults In Terminal off")
+        expect(ScriptRunner.shellEscape("it's") == "'it'\\''s'", "shell escape single quote")
+        let inline = ScriptRunner.terminalCommand(for: bashScript, directory: tmp, files: [file.path])
+        expect(inline.contains("printf '%s\\n' \"$FOLDER\" \"$FILE\" \"$FILENAME\" \"$BASENAME\" \"$EXT\" \"$MRC_DIR\" \"$1\""), "terminal command uses script text")
+        expect(inline.contains("export FOLDER="), "terminal command exports FOLDER")
+        expect(inline.contains("export FILE="), "terminal command exports FILE")
+        expect(inline.contains("cd "), "terminal command cds into folder")
+        expect(!inline.contains(".sh"), "terminal command does not load a temp script file")
+        expect(
+            TerminalLauncher.appleScriptEscape("say \"hi\"\nls\\") == "say \\\"hi\\\"\\nls\\\\",
+            "AppleScript escape quotes, newlines and backslashes",
+            TerminalLauncher.appleScriptEscape("say \"hi\"\nls\\")
+        )
 
         let previous = SharedConfig.configData()
         var custom = MenuConfig.default

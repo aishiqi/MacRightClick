@@ -165,15 +165,96 @@ struct ActionItem: Identifiable, Codable, Equatable {
     }
 }
 
+struct ScriptItem: Identifiable, Codable, Equatable {
+    var id: String
+    var name: String
+    var source: String
+    var enabled: Bool
+    var placement: Placement
+    var runInTerminal: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, source, enabled, placement, runInTerminal
+    }
+
+    init(
+        id: String,
+        name: String,
+        source: String,
+        enabled: Bool,
+        placement: Placement,
+        runInTerminal: Bool = false
+    ) {
+        self.id = id
+        self.name = name
+        self.source = source
+        self.enabled = enabled
+        self.placement = placement
+        self.runInTerminal = runInTerminal
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        source = try container.decode(String.self, forKey: .source)
+        enabled = try container.decode(Bool.self, forKey: .enabled)
+        placement = try container.decode(Placement.self, forKey: .placement)
+        runInTerminal = try container.decodeIfPresent(Bool.self, forKey: .runInTerminal) ?? false
+    }
+
+    static let defaultSource = """
+        # Finder folder is the working directory.
+        # $FOLDER  containing folder of a file, or the folder itself
+        # $FILE    first selected path
+        # Also: $FILENAME $BASENAME $EXT $FOLDERNAME $PARENT $FILES $FOLDERS
+        echo "Folder: $FOLDER"
+        echo "File: $FILE"
+        printf '%s\\n' "$@"
+        """
+
+    static func custom(name: String, source: String) -> ScriptItem {
+        ScriptItem(
+            id: "custom.script.\(UUID().uuidString)",
+            name: name,
+            source: source,
+            enabled: true,
+            placement: .submenu,
+            runInTerminal: false
+        )
+    }
+}
+
 struct MenuConfig: Codable, Equatable {
     var fileTypes: [FileTypeItem]
     var apps: [AppItem]
     var actions: [ActionItem]
+    var scripts: [ScriptItem]
+
+    enum CodingKeys: String, CodingKey {
+        case fileTypes, apps, actions, scripts
+    }
+
+    init(fileTypes: [FileTypeItem], apps: [AppItem], actions: [ActionItem], scripts: [ScriptItem] = []) {
+        self.fileTypes = fileTypes
+        self.apps = apps
+        self.actions = actions
+        self.scripts = scripts
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        fileTypes = try container.decode([FileTypeItem].self, forKey: .fileTypes)
+        apps = try container.decode([AppItem].self, forKey: .apps)
+        actions = try container.decode([ActionItem].self, forKey: .actions)
+        scripts = try container.decodeIfPresent([ScriptItem].self, forKey: .scripts) ?? []
+    }
 
     static let `default` = MenuConfig(
         fileTypes: FileTypeItem.presets,
         apps: AppItem.presets,
-        actions: ActionItem.presets
+        actions: ActionItem.presets,
+        scripts: []
     )
 
     /// Adds any presets that were introduced after the saved config was written.

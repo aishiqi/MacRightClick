@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		00407E83976D54061CC25417 /* ActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051870FB7E771907A87FE0A /* ActionsTabView.swift */; };
 		15FA11EB587E749EFBCEA9B3 /* NewFileTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C2534B7FD06803B4FFF327 /* NewFileTabView.swift */; };
+		1E7C4A29B8D063F15C90A4E6 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D17E5A90C24F618D35E2A /* ScriptRunner.swift */; };
+		6F2A9D18C4E701B35A82F1D0 /* ScriptsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8E1A92D7B3506F1A28E9C3 /* ScriptsTabView.swift */; };
+		9A14F6C2D8B035E17A42C9D1 /* ScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D17E5A90C24F618D35E2A /* ScriptRunner.swift */; };
 		15FFA8FDE7D8454F5C39C051 /* SharedConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F8692FB92BB03654C397B6 /* SharedConfig.swift */; };
 		17CF86A8CC5B28F257FC9AED /* MenuConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E885FA25BBA7F7D100CE /* MenuConfig.swift */; };
 		1CD524D9EAA12CF7956B5EB8 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1252577E0B7CE60098468 /* DebugLog.swift */; };
@@ -75,6 +78,7 @@
 		18DFF6E1C79FB4ED41B3C68B /* MenuCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCache.swift; sourceTree = "<group>"; };
 		1ED3B16160E34E99AC03B157 /* PathResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathResolver.swift; sourceTree = "<group>"; };
 		2E54648F2D6EF3DD693FDFF0 /* TerminalLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalLauncher.swift; sourceTree = "<group>"; };
+		4C8E1A92D7B3506F1A28E9C3 /* ScriptsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptsTabView.swift; sourceTree = "<group>"; };
 		512CC7DF81916956716BB5E0 /* ConfigTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTable.swift; sourceTree = "<group>"; };
 		52EDC838C9F56C3C0462B870 /* SetupTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTabView.swift; sourceTree = "<group>"; };
 		5732D55412ACDE65701E2BAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		7F2849DCDE6677C6938A03A9 /* ExtensionActionRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionActionRunner.swift; sourceTree = "<group>"; };
 		822C03B0F5F3B9964D6275E5 /* MenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuilder.swift; sourceTree = "<group>"; };
 		841EDFCAE76C26392FC7659A /* ExtensionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionStatus.swift; sourceTree = "<group>"; };
+		8B3D17E5A90C24F618D35E2A /* ScriptRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRunner.swift; sourceTree = "<group>"; };
 		8BF6A1B7692663262BD0BB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D5E9BA1DF88BB1D8372F122 /* OpenAppsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAppsTabView.swift; sourceTree = "<group>"; };
 		92F8692FB92BB03654C397B6 /* SharedConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConfig.swift; sourceTree = "<group>"; };
@@ -165,6 +170,7 @@
 				0FF6D6473E4E25AC8C9E6C53 /* IconProvider.swift */,
 				D208E885FA25BBA7F7D100CE /* MenuConfig.swift */,
 				1ED3B16160E34E99AC03B157 /* PathResolver.swift */,
+				8B3D17E5A90C24F618D35E2A /* ScriptRunner.swift */,
 				92F8692FB92BB03654C397B6 /* SharedConfig.swift */,
 				2E54648F2D6EF3DD693FDFF0 /* TerminalLauncher.swift */,
 			);
@@ -178,6 +184,7 @@
 				512CC7DF81916956716BB5E0 /* ConfigTable.swift */,
 				11C2534B7FD06803B4FFF327 /* NewFileTabView.swift */,
 				8D5E9BA1DF88BB1D8372F122 /* OpenAppsTabView.swift */,
+				4C8E1A92D7B3506F1A28E9C3 /* ScriptsTabView.swift */,
 				E1018F18C5C776ABBA1FE787 /* SettingsView.swift */,
 				52EDC838C9F56C3C0462B870 /* SetupTabView.swift */,
 			);
@@ -323,6 +330,8 @@
 				15FA11EB587E749EFBCEA9B3 /* NewFileTabView.swift in Sources */,
 				82C7D91F5E2FBDA24F2E37DF /* OpenAppsTabView.swift in Sources */,
 				42EF2841CE3ED7376B972417 /* PathResolver.swift in Sources */,
+				1E7C4A29B8D063F15C90A4E6 /* ScriptRunner.swift in Sources */,
+				6F2A9D18C4E701B35A82F1D0 /* ScriptsTabView.swift in Sources */,
 				C12C38B77D98A4600F250CB1 /* SettingsView.swift in Sources */,
 				C0C6D6F969B5C9ACDCF0304C /* SetupTabView.swift in Sources */,
 				C976FF84956834762131D419 /* SharedConfig.swift in Sources */,
@@ -344,6 +353,7 @@
 				F1C70663E051452B81EF9AE5 /* MenuCache.swift in Sources */,
 				17CF86A8CC5B28F257FC9AED /* MenuConfig.swift in Sources */,
 				CAE513D177188D9CADBB6B0F /* PathResolver.swift in Sources */,
+				9A14F6C2D8B035E17A42C9D1 /* ScriptRunner.swift in Sources */,
 				15FFA8FDE7D8454F5C39C051 /* SharedConfig.swift in Sources */,
 				53BBCE1D6C66B9BB58E50CC3 /* TerminalLauncher.swift in Sources */,
 			);

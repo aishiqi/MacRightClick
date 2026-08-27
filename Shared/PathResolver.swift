@@ -33,9 +33,13 @@ enum PathResolver {
     }
 
     static func dirPaths(selected: [URL]?, targeted: URL?) -> [String] {
-        selectedOrTargeted(selected: selected, targeted: targeted).map { url in
-            isDirectory(url) ? url.path : url.deletingLastPathComponent().path
-        }
+        selectedOrTargeted(selected: selected, targeted: targeted).map { folderPath(for: $0.path) }
+    }
+
+    /// Containing folder of a file, or the path itself when it is a folder.
+    static func folderPath(for path: String) -> String {
+        let url = URL(fileURLWithPath: path)
+        return isDirectory(url) ? url.path : url.deletingLastPathComponent().path
     }
 
     static func uniqueURL(in directory: URL, preferredName: String) -> URL {

@@ -14,6 +14,9 @@ struct SettingsView: View {
             ActionsTabView()
                 .tabItem { Label("Actions", systemImage: "bolt") }
                 .tag(SettingsTab.actions)
+            ScriptsTabView()
+                .tabItem { Label("Scripts", systemImage: "terminal") }
+                .tag(SettingsTab.scripts)
             SetupTabView()
                 .tabItem { Label("Setup", systemImage: "gear") }
                 .tag(SettingsTab.setup)

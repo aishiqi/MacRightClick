@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MacRightClick — Finder right-click menus for Mac</title>
+  <meta name="description" content="Build your own Finder right-click menu on macOS. New files, open in any app, run scripts, copy paths. Signed and notarized, macOS 14+.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <meta property="og:title" content="MacRightClick">
+  <meta property="og:description" content="Build your own Finder right-click menu on macOS.">
+  <meta property="og:image" content="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="./">
+      <img src="assets/icon.png" width="36" height="36" alt="">
+      MacRightClick
+    </a>
+    <a class="btn btn-solid" id="download" href="https://github.com/aishiqi/MacRightClick/releases/latest/download/MacRightClick-1.0.0.dmg">Download</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="kicker">macOS 14+ · Developer ID notarized</p>
+      <h1>Your Finder menu,<br>built by you.</h1>
+      <p class="lede">Create files, open the selection in any app, run a script, or copy a path — from the right-click menu you already use.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid lg" id="download-hero" href="https://github.com/aishiqi/MacRightClick/releases/latest/download/MacRightClick-1.0.0.dmg">Download for Mac</a>
+        <p class="meta" id="meta">Version 1.0.0 · Drag to Applications</p>
+      </div>
+    </div>
+    <div class="hero-shot">
+      <img src="assets/screenshot4.png" alt="Finder right-click menu with New Folder, Copy File Path, Open Terminal, New File, Open In, and Scripts">
+    </div>
+  </header>
+
+  <ul class="features">
+    <li>
+      <span>New File</span>
+      Text, Markdown, Swift, Python, and your own types — created in the folder you clicked.
+    </li>
+    <li>
+      <span>Open In</span>
+      Send the selection to VS Code, Cursor, Xcode, Terminal, or any app you add.
+    </li>
+    <li>
+      <span>Scripts</span>
+      Run a bash script on the file or folder you clicked.
+    </li>
+    <li>
+      <span>Actions</span>
+      New folder, copy file or directory path, open Terminal. Pin what you use to the top level.
+    </li>
+  </ul>
+
+  <section class="gallery" aria-label="Screenshots">
+    <img src="assets/screenshot1.png" alt="New File settings" loading="lazy">
+    <img src="assets/screenshot5.png" alt="Open Apps settings" loading="lazy">
+    <img src="assets/screenshot3.png" alt="Script editor" loading="lazy">
+  </section>
+
+  <section class="install">
+    <ol>
+      <li><strong>Download</strong> the disk image and open it.</li>
+      <li><strong>Drag</strong> MacRightClick onto Applications.</li>
+      <li><strong>Activate</strong> the Finder extension in Setup.</li>
+    </ol>
+  </section>
+
+  <footer class="footer">
+    <a class="btn btn-solid" id="download-bottom" href="https://github.com/aishiqi/MacRightClick/releases/latest/download/MacRightClick-1.0.0.dmg">Download for Mac</a>
+  </footer>
+
+  <script src="download.js"></script>
+</body>
+</html>
